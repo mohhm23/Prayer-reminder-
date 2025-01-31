@@ -75,14 +75,14 @@
             background: #004d40;
             transform: scale(1.05);
         }
-        .dark-mode {
-            background: #222;
-            color: #fff;
+        .reward, .advice {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 15px;
+            display: none;
         }
-        .dark-mode .container {
-            background: #333;
-            color: white;
-        }
+        .reward { color: #27ae60; }
+        .advice { color: #d32f2f; }
         .footer {
             margin-top: 30px;
             padding: 15px;
@@ -99,8 +99,6 @@
     <div class="container">
         <h1>مرحبًا بك، <span id="username">ضيف</span>!</h1>
 
-        <button onclick="toggleDarkMode()" class="btn">🌙 تبديل الوضع الليلي</button>
-
         <div class="card">
             <h2>مواقيت الصلوات حسب مدينتك</h2>
             <input type="text" id="city" placeholder="أدخل مدينتك" class="btn">
@@ -108,6 +106,12 @@
             <table id="prayerTable">
                 <tr><th>الصلاة</th><th>الوقت</th></tr>
             </table>
+        </div>
+
+        <div class="card">
+            <h2>فضل المحافظة على الصلوات الخمس</h2>
+            <p>لمعرفة فضل من حافظ على الصلوات الخمس، وأداهن كما أُمر، يمكنك زيارة الرابط التالي:</p>
+            <a href="https://search.app/b7khmbqAWeH1cd5k6" target="_blank" class="btn">اضغط هنا</a>
         </div>
 
         <div class="card">
@@ -142,10 +146,6 @@
                 document.getElementById("username").textContent = userName;
             }
         });
-
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-        }
 
         function fetchPrayerTimes() {
             let city = document.getElementById("city").value;
