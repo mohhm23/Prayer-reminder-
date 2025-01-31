@@ -94,6 +94,85 @@
         }
     </style>
 </head>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let userName = prompt("أدخل اسمك:");
+        if (userName && userName.trim() !== "") {
+            document.getElementById("username").textContent = userName;
+        }
+    });
+
+    function fetchPrayerTimes() {
+        let city = document.getElementById("city").value;
+        if (!city) {
+            alert("الرجاء إدخال اسم المدينة");
+            return;
+        }
+        fetch('https://api.aladhan.com/v1/timingsByCity?city=' + city + '&country=SA&method=2')
+            .then(response => response.json())
+            .then(data => {
+                let timings = data.data.timings;
+                let table = document.getElementById("prayerTable");
+                table.innerHTML = "<tr><th>الصلاة</th><th>الوقت</th></tr>";
+
+                let prayers = {
+                    "الفجر": "Fajr",
+                    "الشروق": "Sunrise",
+                    "الظهر": "Dhuhr",
+                    "العصر": "Asr",
+                    "المغرب": "Maghrib",
+                    "العشاء": "Isha"
+                };
+
+                for (let [name, key] of Object.entries(prayers)) {
+                    let time = convertTo12HourFormat(timings[key]);
+                    table.innerHTML += `<tr><td>${name}</td><td>${time}</td></tr>`;
+                }
+            })
+            .catch(() => alert("خطأ في جلب البيانات، تحقق من اسم المدينة"));
+    }
+
+    function convertTo12HourFormat(time) {
+        let [hour, minute] = time.split(":").map(Number);
+        let period = hour >= 12 ? "مساءً" : "صباحًا";
+        hour = hour % 12 || 12;
+        return `${hour}:${minute} ${period}`;
+    }
+
+    function showReward() {
+        let rewards = [
+            "🎁 هنيئًا لك! 'اللهم اجعل لي من كل ضيق مخرجًا ومن كل هم فرجًا'",
+            "🎁 أحسنت! 'اللهم اجعلني من المقبولين يوم القيامة'",
+            "🎁 بارك الله فيك! 'اللهم اجعل صلاتي سببًا في دخول الفردوس الأعلى'"
+        ];
+        let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+        document.getElementById("reward").innerText = randomReward;
+        document.getElementById("reward").style.display = "block";
+
+        // ✅ إخفاء نموذج السؤال عن عدم إتمام الصلاة
+        document.getElementById("reasonForm").style.display = "none";
+        document.getElementById("advice").style.display = "none";
+    }
+
+    function showReason() {
+        document.getElementById("reasonForm").style.display = "block";
+    }
+
+    function showAdvice() {
+        let reason = document.getElementById("reason").value;
+        let messages = {
+            "sick": "🤲 نسأل الله لك الشفاء والعافية.",
+            "lazy": "📢 تذكر أن الصلاة هي نور قلبك.",
+            "busy": "⏳ تنظيم الوقت مهم للصلاة.",
+            "forgot": "🔔 ضع منبهًا يذكرك بالصلاة."
+        };
+        document.getElementById("advice").innerText = messages[reason];
+        document.getElementById("advice").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
 <body>
 
     <div class="container">
