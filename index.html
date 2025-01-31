@@ -97,125 +97,247 @@
             text-align: center;
             animation: fadeIn 1.5s ease-in-out;
         }
+        .hidden {
+            display: none;
+        }
+        .calendar {
+            margin-top: 20px;
+        }
+        .adhkar {
+            margin-top: 20px;
+        }
+        .map {
+            margin-top: 20px;
+            height: 400px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>مرحبًا بك، <span id="username">ضيف</span>!</h1>
-
-        <div class="card">
-            <h2>مواقيت الصلوات في المملكة العربية السعودية</h2>
-            <table>
-                <tr><th>الصلاة</th><th>الوقت</th></tr>
-                <tr><td>الفجر</td><td>05:10 صباحًا</td></tr>
-                <tr><td>الشروق</td><td>06:30 صباحًا</td></tr>
-                <tr><td>الضحى</td><td>07:00 - 11:30 صباحًا</td></tr>
-                <tr><td>الظهر</td><td>12:00 مساءً</td></tr>
-                <tr><td>العصر</td><td>03:15 مساءً</td></tr>
-                <tr><td>المغرب</td><td>05:45 مساءً</td></tr>
-                <tr><td>العشاء</td><td>07:15 مساءً</td></tr>
-            </table>
-        </div>
-
-        <div class="card">
-            <h2>فضل المحافظة على الصلوات الخمس</h2>
-            <p>لمعرفة فضل من حافظ على الصلوات الخمس، وأداهن كما أُمر، يمكنك زيارة الرابط التالي:</p>
-            <a href="https://search.app/b7khmbqAWeH1cd5k6" target="_blank" class="btn">اضغط هنا</a>
-        </div>
-
-        <div class="card">
-            <h2>هل أتممت الصلوات والسنن اليوم؟</h2>
-            <button class="btn" onclick="showReward()">نعم، أتممتها</button>
-            <button class="btn" onclick="showReason()">لا، لم أتمم</button>
-            <div id="reward" class="reward"></div>
-
-            <div id="reasonForm" class="hidden">
-                <p>لماذا لم تتمم الصلوات والسنن؟</p>
-                <select class="btn" id="reason">
-                    <option value="sick">كنت مريضًا</option>
-                    <option value="lazy">كنت متكاسلًا</option>
-                    <option value="busy">كنت مشغولًا</option>
-                    <option value="forgot">نسيت</option>
-                </select>
-                <button class="btn" onclick="showAdvice()">إرسال</button>
-            </div>
-
-            <div id="advice" class="advice"></div>
-        </div>
-
-        
-    <div class="card">
-        
-
+<div class="container">
+    <h1>مرحبًا بك، <span id="username">ضيف</span>!</h1>
 
     <div class="card">
-        
-
-
-    <div class="card" style="text-align: center;">
-        <h2>تطبيق مؤذن السعودية</h2>
-        <img src="https://play-lh.googleusercontent.com/S4An15ysxqTBJVAobaq-YWwAZ5JGGuw0lFDkPtqJ37IBTsgUgNni2E6KuuSI6-tVsBw=w600-h300-pc0xffffff-pd" 
-             alt="شعار تطبيق مؤذن السعودية" style="width: 150px; margin-bottom: 15px; border-radius: 10px;">
-        <p>تطبيق مؤذن السعودية يوفر أوقات الصلاة بدقة مع تنبيهات الأذان، ويحتوي على ميزات مثل تحديد اتجاه القبلة والتذكيرات بالأذكار.</p>
-        <div style="display: flex; justify-content: center; gap: 10px;">
-            <a href="https://play.google.com/store/apps/details?id=com.mahmoud.android.MoadenSaudia" target="_blank" class="btn" style="flex: 1;">تحميل للأندرويد</a>
-            <a href="https://apps.apple.com/us/app/%D9%85%D8%A4%D8%B0%D9%86-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id1304439979" target="_blank" class="btn" style="flex: 1;">تحميل للآيفون</a>
-        </div>
-        <p style="margin-top: 10px; font-size: 14px; color: red;"><strong>ملاحظة:</strong> هذا التطبيق ليس تابعًا لنا، وإنما نوصي به للاستفادة منه.</p>
+        <h2>مواقيت الصلوات في المملكة العربية السعودية</h2>
+        <table>
+            <tr><th>الصلاة</th><th>الوقت</th></tr>
+            <tr><td>الفجر</td><td>05:10 صباحًا</td></tr>
+            <tr><td>الشروق</td><td>06:30 صباحًا</td></tr>
+            <tr><td>الضحى</td><td>07:00 - 11:30 صباحًا</td></tr>
+            <tr><td>الظهر</td><td>12:00 مساءً</td></tr>
+            <tr><td>العصر</td><td>03:15 مساءً</td></tr>
+            <tr><td>المغرب</td><td>05:45 مساءً</td></tr>
+            <tr><td>العشاء</td><td>07:15 مساءً</td></tr>
+        </table>
     </div>
 
-<div class="footer">
-    <div style="margin-top: 20px; padding: 15px; background: #1b5e20; color: white; 
-                font-size: 18px; font-weight: bold; text-align: center; border-radius: 10px;">
+    <div class="card">
+        <h2>فضل المحافظة على الصلوات الخمس</h2>
+        <p>لمعرفة فضل من حافظ على الصلوات الخمس، وأداهن كما أُمر، يمكنك زيارة الرابط التالي:</p>
+        <a href="https://search.app/b7khmbqAWeH1cd5k6" target="_blank" class="btn">اضغط هنا</a>
+    </div>
+
+    <div class="card">
+        <h2>هل أتممت الصلوات والسنن اليوم؟</h2>
+        <button class="btn" onclick="showReward()">نعم، أتممتها</button>
+        <button class="btn" onclick="showReason()">لا، لم أتمم</button>
+        <div id="reward" class="reward"></div>
+
+        <div id="reasonForm" class="hidden">
+            <p>لماذا لم تتمم الصلوات والسنن؟</p>
+            <select class="btn" id="reason">
+                <option value="sick">كنت مريضًا</option>
+                <option value="lazy">كنت متكاسلًا</option>
+                <option value="busy">كنت مشغولًا</option>
+                <option value="forgot">نسيت</option>
+            </select>
+            <button class="btn" onclick="showAdvice()">إرسال</button>
+        </div>
+
+        <div id="advice" class="advice"></div>
+    </div>
+
+    <div class="card calendar">
+        <h2>التقويم اليومي</h2>
+        <iframe src="https://calendar.google.com/calendar/embed?src=ar.saudi%23holiday%40group.v.calendar.google.com&ctz=Asia/Riyadh" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <div class="card adhkar">
+        <h2>الأذكار والأدعية اليومية</h2>
+        <p>اذكار الصباح:</p>
+        <p>بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم.</p>
+        <p>اذكار المساء:</p>
+        <p>اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير.</p>
+    </div>
+
+    <div class="card map">
+        <h2>المساجد القريبة</h2>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1yZzQ3cW4S8Z4YbZf5-8H5m9sQ8I2nY8&hl=ar" width="640" height="480"></iframe>
+    </div>
+
+    <div class="footer">
         تم صنع الموقع من قبل <span style="color: #FFD700;">عائلة روافد</span> و<span style="color: #FFD700;">جمعية فتيان</span>
         <br><br>
         <span style="font-size: 16px; color: #FFD700;">📢 ملاحظة: هذا الموقع يتلقى تحديثات فورية لضمان أفضل تجربة للمستخدمين</span>
+        <br>
+        🕌 لا تنسَ أن الصلاة عمود الدين، فحافظ عليها تسعد في الدنيا والآخرة 🕌
     </div>
+</div>
 
-            🕌 لا تنسَ أن الصلاة عمود الدين، فحافظ عليها تسعد في الدنيا والآخرة 🕌
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let userName = prompt("أدخل اسمك:");
-            if (userName) {
-                document.getElementById("username").textContent = userName;
-            }
-        });
-
-        function showReward() {
-            let rewards = [
-                "🎁 هنيئًا لك! 'اللهم اجعل لي من كل ضيق مخرجًا ومن كل هم فرجًا'",
-                "🎁 أحسنت! هديتك: 'اللهم اجعلني من المقبولين يوم القيامة'",
-                "🎁 بارك الله فيك! 'اللهم اجعل صلاتي سببًا في دخول الفردوس الأعلى'"
-            ];
-            let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
-            document.getElementById("reward").innerText = randomReward;
-            document.getElementById("reward").style.display = "block";
-            document.getElementById("reasonForm").style.display = "none";
-            document.getElementById("advice").style.display = "none";
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let userName = prompt("أدخل اسمك:");
+        if (userName) {
+            document.getElementById("username").textContent = userName;
         }
+    });
 
-        function showReason() {
-            document.getElementById("reasonForm").style.display = "block";
-            document.getElementById("reward").style.display = "none";
-            document.getElementById("advice").style.display = "none";
-        }
+    function showReward() {
+        let rewards = [
+            "🎁 هنيئًا لك! 'اللهم اجعل لي من كل ضيق مخرجًا ومن كل هم فرجًا'",
+            "🎁 أحسنت! هديتك: 'اللهم اجعلني من المقبولين يوم القيامة'",
+            "🎁 بارك الله فيك! 'اللهم اجعل صلاتي سببًا في دخول الفردوس الأعلى'"
+        ];
+        let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+        document.getElementById("reward").innerText = randomReward;
+        document.getElementById("reward").style.display = "block";
+        document.getElementById("reasonForm").style.display = "none";
+        document.getElementById("advice").style.display = "none";
+    }
 
-        function showAdvice() {
-            const reason = document.getElementById("reason").value;
-            const responses = {
-                "sick": "🤲 نسأل الله لك الشفاء والعافية، وأجرٌ على نيتك.",
-                "lazy": "📢 تذكر أن الصلاة هي نور قلبك، فلا تتركها.",
-                "busy": "⏳ تنظيم الوقت يساعدك على أداء الصلاة دون تأخير.",
-                "forgot": "🔔 ضع منبهًا يذكرك بالصلاة، فهي أهم ما في يومك!"
-            };
-            document.getElementById("advice").innerText = responses[reason];
-            document.getElementById("advice").style.display = "block";
-        }
-    </script>
+    function showReason() {
+        document.getElementById("reasonForm").style.display = "block";
+        document.getElementById("reward").style.display = "none";
+        document.getElementById("advice").style.display = "none";
+    }
+
+    function showAdvice() {
+        const reason = document.getElementById("reason").value;
+        const responses = {
+            "sick": "🤲 نسأل الله لك الشفاء والعافية، وأجرٌ على نيتك.",
+            "lazy": "📢 تذكر أن الصلاة هي نور قلبك، فلا تتركها.",
+            "busy": "⏳ تنظيم الوقت يساعدك على أداء الصلاة دون تأخير.",
+            "forgot": "🔔 ضع منبهًا يذكرك بالصلاة، فهي أهم ما في يومك!"
+        };
+        document.getElementById("advice").innerText = responses[reason];
+        document.getElementById("advice").style.display = "block";
+    }
+</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فضل الصلوات والسنن اليومية</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        body {
+            font-family: 'Tajawal', sans-serif;
+            text-align: center;
+            direction: rtl;
+            background: linear-gradient(to bottom, #4caf50, #ffffff);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #1b5e20;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background: #e8f5e9;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            background: #c8e6c9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        th {
+            background-color: #1b5e20;
+            color: white;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 12px 30px;
+            background: #1b5e20;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: #004d40;
+            transform: scale(1.05);
+        }
+        .reward, .advice {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+        .reward { color: #27ae60; }
+        .advice { color: #d32f2f; }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background: #1b5e20;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
