@@ -308,6 +308,26 @@
             document.getElementById("advice").style.display = "block";
         }
     </script>
+<video id="background-audio" autoplay style="display: none;">
+    <source src="https://github.com/mohhm23/Prayer-reminder-/raw/refs/heads/main/-%D9%82%D8%B1%D8%A7%D9%86-%D9%83%D8%B1%D9%8A%D9%85-%D8%B1%D8%A7%D8%AD%D9%87-%D9%86%D9%81%D8%B3%D9%8A%D9%87-%D9%84%D8%A7%D9%8A%D9%83%D9%84%D9%81-%D8%A7%D9%84%D9%84%D9%87-%D9%86%D9%81%D8%B3%D8%A2-%D8%A7%D9%84%D8%A7-%D9%88%D8%B3%D8%B9%D9%87%D8%A7-HD%20(1).mp4" type="video/mp4">
+    متصفحك لا يدعم تشغيل الفيديو.
+</video>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let video = document.getElementById("background-audio");
+
+        // ✅ تشغيل الصوت فقط مرة واحدة بدون تكرار
+        video.volume = 1.0;  // ضبط مستوى الصوت
+        video.play();
+
+        // ✅ عند انتهاء الفيديو، لا يتم تكراره
+        video.onended = function() {
+            video.pause();
+        };
+    });
+</script>
+
+</body>
 </body>
 </html>
