@@ -1,47 +1,254 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex, nofollow">
-    <title>الموقع تحت الصيانة</title>
+    <title>فضل الصلوات والسنن اليومية</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f8fa;
+            font-family: 'Tajawal', sans-serif;
+            text-align: center;
+            direction: rtl;
+            background: linear-gradient(to bottom, #4caf50, #ffffff);
+            color: #333;
             margin: 0;
             padding: 0;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            direction: rtl;
+            transition: all 0.3s ease-in-out;
         }
+        .loader {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .spinner {
+            border: 8px solid #e0e0e0;
+            border-top: 8px solid #4caf50;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            text-align: center;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #004080;
-            font-size: 24px;
+            color: #1b5e20;
+            font-size: 32px;
             margin-bottom: 20px;
         }
-        p {
-            color: #555;
+        .card {
+            background: #e8f5e9;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            background: #c8e6c9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #1b5e20;
+            color: white;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 12px 30px;
+            background: #1b5e20;
+            color: #fff;
             font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: #004d40;
+            transform: scale(1.05);
+        }
+        .reward, .advice {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+        .reward { color: #27ae60; }
+        .advice { color: #d32f2f; }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background: #1b5e20;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>عذرًا، هذا الموقع تحت الصيانة</h1>
-        <p>نحن نعمل على تحسين الموقع. شكرًا لتفهمكم.</p>
+
+    <!-- شاشة التحميل -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
     </div>
+
+    <div class="container" id="mainContent" style="display:none;">
+        <h1>مرحبًا بك، <span id="username">ضيف</span>!</h1>
+
+        <div class="card">
+            <h2>مواقيت الصلوات في المملكة العربية السعودية</h2>
+            <table>
+                <tr><th>الصلاة</th><th>الوقت</th></tr>
+                <tr><td>الفجر</td><td>05:10 صباحًا</td></tr>
+                <tr><td>الشروق</td><td>06:30 صباحًا</td></tr>
+                <tr><td>الضحى</td><td>07:00 - 11:30 صباحًا</td></tr>
+                <tr><td>الظهر</td><td>12:00 مساءً</td></tr>
+                <tr><td>العصر</td><td>03:15 مساءً</td></tr>
+                <tr><td>المغرب</td><td>05:45 مساءً</td></tr>
+                <tr><td>العشاء</td><td>07:15 مساءً</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>فضل المحافظة على الصلوات الخمس</h2>
+            <p>لمعرفة فضل من حافظ على الصلوات الخمس، وأداهن كما أُمر، يمكنك زيارة الرابط التالي:</p>
+            <a href="https://search.app/b7khmbqAWeH1cd5k6" target="_blank" class="btn">اضغط هنا</a>
+        </div>
+
+        <div class="card">
+            <h2>هل أتممت الصلوات والسنن اليوم؟</h2>
+            <button class="btn" onclick="showReward()">نعم، أتممتها</button>
+            <button class="btn" onclick="showReason()">لا، لم أتمم</button>
+            <div id="reward" class="reward"></div>
+
+            <div id="reasonForm" class="hidden">
+                <p>لماذا لم تتمم الصلوات والسنن؟</p>
+                <select class="btn" id="reason">
+                    <option value="sick">كنت مريضًا</option>
+                    <option value="lazy">كنت متكاسلًا</option>
+                    <option value="busy">كنت مشغولًا</option>
+                    <option value="forgot">نسيت</option>
+                </select>
+                <button class="btn" onclick="showAdvice()">إرسال</button>
+            </div>
+
+            <div id="advice" class="advice"></div>
+        </div>
+
+        <div class="card">
+            <h2>تطبيق مؤذن السعودية</h2>
+            <img src="https://play-lh.googleusercontent.com/S4An15ysxqTBJVAobaq-YWwAZ5JGGuw0lFDkPtqJ37IBTsgUgNni2E6KuuSI6-tVsBw=w600-h300-pc0xffffff-pd"
+                 alt="شعار تطبيق مؤذن السعودية" style="width: 150px; margin-bottom: 15px; border-radius: 10px;">
+            <p>تطبيق مؤذن السعودية يوفر أوقات الصلاة بدقة مع تنبيهات الأذان، ويحتوي على ميزات مثل تحديد اتجاه القبلة والتذكيرات بالأذكار.</p>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <a href="https://play.google.com/store/apps/details?id=com.mahmoud.android.MoadenSaudia" target="_blank" class="btn" style="flex: 1;">تحميل للأندرويد</a>
+                <a href="https://apps.apple.com/us/app/%D9%85%D8%A4%D8%B0%D9%86-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id1304439979" target="_blank" class="btn" style="flex: 1;">تحميل للآيفون</a>
+            </div>
+            <p style="margin-top: 10px; font-size: 14px; color: red;"><strong>ملاحظة:</strong> هذا التطبيق ليس تابعًا لنا، وإنما نوصي به للاستفادة منه.</p>
+        </div>
+
+        <div class="footer">
+            🕌 لا تنسَ أن الصلاة عمود الدين، فحافظ عليها تسعد في الدنيا والآخرة 🕌
+        </div>
+    </div>
+
+    <script>
+        // شاشة التحميل
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("loader");
+            const mainContent = document.getElementById("mainContent");
+            setTimeout(() => {
+                loader.style.display = "none";
+                mainContent.style.display = "block";
+            }, 1200); // مدة شاشة التحميل
+        });
+
+        // الاسم المخصص
+        document.addEventListener("DOMContentLoaded", function () {
+            let userName = prompt("أدخل اسمك:");
+            if (userName) {
+                document.getElementById("username").textContent = userName;
+            }
+        });
+
+        // الوظائف التفاعلية
+        function showReward() {
+            document.getElementById('reward').style.display = 'block';
+            document.getElementById('reward').textContent = 'أحسنت! ثبتك الله وجعل صلاتك نورًا لك يوم القيامة 🌟';
+            document.getElementById('reasonForm').classList.add('hidden');
+            document.getElementById('advice').style.display = 'none';
+        }
+
+        function showReason() {
+            document.getElementById('reward').style.display = 'none';
+            document.getElementById('reasonForm').classList.remove('hidden');
+            document.getElementById('advice').style.display = 'none';
+        }
+
+        function showAdvice() {
+            const reason = document.getElementById('reason').value;
+            const advice = document.getElementById('advice');
+            advice.style.display = 'block';
+
+            let message = '';
+            switch (reason) {
+                case 'sick':
+                    message = 'شفاك الله وعافاك. حاول أن تصلي على قدر استطاعتك.';
+                    break;
+                case 'lazy':
+                    message = 'اجتهد، فالصلاة خير معين على النشاط والبركة.';
+                    break;
+                case 'busy':
+                    message = 'اجعل صلاتك أولوية، فكل شيء بعدها يتيسر بإذن الله.';
+                    break;
+                case 'forgot':
+                    message = 'حاول وضع تنبيهات أو ربطها بعادة يومية حتى لا تنساها.';
+                    break;
+                default:
+                    message = 'حافظ على صلاتك، فهي أول ما تُسأل عنه يوم القيامة.';
+            }
+
+            advice.textContent = message;
+        }
+    </script>
+
 </body>
 </html>
