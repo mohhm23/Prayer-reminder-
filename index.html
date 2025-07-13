@@ -94,96 +94,22 @@
         }
     </style>
 </head>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let userName = prompt("أدخل اسمك:");
-        if (userName && userName.trim() !== "") {
-            document.getElementById("username").textContent = userName;
-        }
-    });
-
-    function fetchPrayerTimes() {
-        let city = document.getElementById("city").value;
-        if (!city) {
-            alert("الرجاء إدخال اسم المدينة");
-            return;
-        }
-        fetch('https://api.aladhan.com/v1/timingsByCity?city=' + city + '&country=SA&method=2')
-            .then(response => response.json())
-            .then(data => {
-                let timings = data.data.timings;
-                let table = document.getElementById("prayerTable");
-                table.innerHTML = "<tr><th>الصلاة</th><th>الوقت</th></tr>";
-
-                let prayers = {
-                    "الفجر": "Fajr",
-                    "الشروق": "Sunrise",
-                    "الظهر": "Dhuhr",
-                    "العصر": "Asr",
-                    "المغرب": "Maghrib",
-                    "العشاء": "Isha"
-                };
-
-                for (let [name, key] of Object.entries(prayers)) {
-                    let time = convertTo12HourFormat(timings[key]);
-                    table.innerHTML += `<tr><td>${name}</td><td>${time}</td></tr>`;
-                }
-            })
-            .catch(() => alert("خطأ في جلب البيانات، تحقق من اسم المدينة"));
-    }
-
-    function convertTo12HourFormat(time) {
-        let [hour, minute] = time.split(":").map(Number);
-        let period = hour >= 12 ? "مساءً" : "صباحًا";
-        hour = hour % 12 || 12;
-        return `${hour}:${minute} ${period}`;
-    }
-
-    function showReward() {
-        let rewards = [
-            "🎁 هنيئًا لك! 'اللهم اجعل لي من كل ضيق مخرجًا ومن كل هم فرجًا'",
-            "🎁 أحسنت! 'اللهم اجعلني من المقبولين يوم القيامة'",
-            "🎁 بارك الله فيك! 'اللهم اجعل صلاتي سببًا في دخول الفردوس الأعلى'"
-        ];
-        let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
-        document.getElementById("reward").innerText = randomReward;
-        document.getElementById("reward").style.display = "block";
-
-        // ✅ إخفاء نموذج السؤال عن عدم إتمام الصلاة
-        document.getElementById("reasonForm").style.display = "none";
-        document.getElementById("advice").style.display = "none";
-    }
-
-    function showReason() {
-        document.getElementById("reasonForm").style.display = "block";
-    }
-
-    function showAdvice() {
-        let reason = document.getElementById("reason").value;
-        let messages = {
-            "sick": "🤲 نسأل الله لك الشفاء والعافية.",
-            "lazy": "📢 تذكر أن الصلاة هي نور قلبك.",
-            "busy": "⏳ تنظيم الوقت مهم للصلاة.",
-            "forgot": "🔔 ضع منبهًا يذكرك بالصلاة."
-        };
-        document.getElementById("advice").innerText = messages[reason];
-        document.getElementById("advice").style.display = "block";
-    }
-</script>
-
-</body>
-</html>
 <body>
 
     <div class="container">
         <h1>مرحبًا بك، <span id="username">ضيف</span>!</h1>
 
         <div class="card">
-            <h2>مواقيت الصلوات حسب مدينتك</h2>
-            <input type="text" id="city" placeholder="أدخل مدينتك" class="btn">
-            <button onclick="fetchPrayerTimes()" class="btn">جلب المواقيت</button>
-            <table id="prayerTable">
+            <h2>مواقيت الصلوات في المملكة العربية السعودية</h2>
+            <table>
                 <tr><th>الصلاة</th><th>الوقت</th></tr>
+                <tr><td>الفجر</td><td>05:10 صباحًا</td></tr>
+                <tr><td>الشروق</td><td>06:30 صباحًا</td></tr>
+                <tr><td>الضحى</td><td>07:00 - 11:30 صباحًا</td></tr>
+                <tr><td>الظهر</td><td>12:00 مساءً</td></tr>
+                <tr><td>العصر</td><td>03:15 مساءً</td></tr>
+                <tr><td>المغرب</td><td>05:45 مساءً</td></tr>
+                <tr><td>العشاء</td><td>07:15 مساءً</td></tr>
             </table>
         </div>
 
@@ -214,120 +140,30 @@
         </div>
 
         <div class="card" style="text-align: center;">
-        <h2>تطبيق مؤذن السعودية</h2>
-        <img src="https://play-lh.googleusercontent.com/S4An15ysxqTBJVAobaq-YWwAZ5JGGuw0lFDkPtqJ37IBTsgUgNni2E6KuuSI6-tVsBw=w600-h300-pc0xffffff-pd" 
-             alt="شعار تطبيق مؤذن السعودية" style="width: 150px; margin-bottom: 15px; border-radius: 10px;">
-        <p>تطبيق مؤذن السعودية يوفر أوقات الصلاة بدقة مع تنبيهات الأذان، ويحتوي على ميزات مثل تحديد اتجاه القبلة والتذكيرات بالأذكار.</p>
-        <div style="display: flex; justify-content: center; gap: 10px;">
-            <a href="https://play.google.com/store/apps/details?id=com.mahmoud.android.MoadenSaudia" target="_blank" class="btn" style="flex: 1;">تحميل للأندرويد</a>
-            <a href="https://apps.apple.com/us/app/%D9%85%D8%A4%D8%B0%D9%86-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id1304439979" target="_blank" class="btn" style="flex: 1;">تحميل للآيفون</a>
+            <h2>تطبيق مؤذن السعودية</h2>
+            <img src="https://play-lh.googleusercontent.com/S4An15ysxqTBJVAobaq-YWwAZ5JGGuw0lFDkPtqJ37IBTsgUgNni2E6KuuSI6-tVsBw=w600-h300-pc0xffffff-pd" 
+                 alt="شعار تطبيق مؤذن السعودية" style="width: 150px; margin-bottom: 15px; border-radius: 10px;">
+            <p>تطبيق مؤذن السعودية يوفر أوقات الصلاة بدقة مع تنبيهات الأذان، ويحتوي على ميزات مثل تحديد اتجاه القبلة والتذكيرات بالأذكار.</p>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <a href="https://play.google.com/store/apps/details?id=com.mahmoud.android.MoadenSaudia" target="_blank" class="btn" style="flex: 1;">تحميل للأندرويد</a>
+                <a href="https://apps.apple.com/us/app/%D9%85%D8%A4%D8%B0%D9%86-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id1304439979" target="_blank" class="btn" style="flex: 1;">تحميل للآيفون</a>
+            </div>
+            <p style="margin-top: 10px; font-size: 14px; color: red;"><strong>ملاحظة:</strong> هذا التطبيق ليس تابعًا لنا، وإنما نوصي به للاستفادة منه.</p>
         </div>
-        <p style="margin-top: 10px; font-size: 14px; color: red;"><strong>ملاحظة:</strong> هذا التطبيق ليس تابعًا لنا، وإنما نوصي به للاستفادة منه.</p>
-    </div>
 
-    <div class="card" style="text-align: center; background: #1b5e20; color: white; padding: 20px; border-radius: 12px;">
-        <h2 style="color: #FFD700;">تم صنع الموقع من قبل</h2>
-        <p style="font-size: 18px;">عائلة <span style="color: #FFD700;">روافد</span> و <span style="color: #FFD700;">جمعية فتيان</span></p>
-        <p style="font-size: 16px;">📢 <strong>ملاحظة:</strong> هذا الموقع يتلقى تحديثات فورية لضمان أفضل تجربة للمستخدمين.</p>
-    </div>
-
-    <div class="footer">
-        🕌 لا تنسَ أن الصلاة عمود الدين، فحافظ عليها تسعد في الدنيا والآخرة 🕌
-    </div>
+        <div class="footer">
+            🕌 لا تنسَ أن الصلاة عمود الدين، فحافظ عليها تسعد في الدنيا والآخرة 🕌
+        </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let userName = prompt("أدخل اسمك:");
-            if (userName && userName.trim() !== "") {
+            if (userName) {
                 document.getElementById("username").textContent = userName;
             }
         });
-
-        function fetchPrayerTimes() {
-            let city = document.getElementById("city").value;
-            if (!city) {
-                alert("الرجاء إدخال اسم المدينة");
-                return;
-            }
-            fetch('https://api.aladhan.com/v1/timingsByCity?city=' + city + '&country=SA&method=2')
-                .then(response => response.json())
-                .then(data => {
-                    let timings = data.data.timings;
-                    let table = document.getElementById("prayerTable");
-                    table.innerHTML = "<tr><th>الصلاة</th><th>الوقت</th></tr>";
-
-                    let prayers = {
-                        "الفجر": "Fajr",
-                        "الشروق": "Sunrise",
-                        "الظهر": "Dhuhr",
-                        "العصر": "Asr",
-                        "المغرب": "Maghrib",
-                        "العشاء": "Isha"
-                    };
-
-                    for (let [name, key] of Object.entries(prayers)) {
-                        let time = convertTo12HourFormat(timings[key]);
-                        table.innerHTML += `<tr><td>${name}</td><td>${time}</td></tr>`;
-                    }
-                })
-                .catch(() => alert("خطأ في جلب البيانات، تحقق من اسم المدينة"));
-        }
-
-        function convertTo12HourFormat(time) {
-            let [hour, minute] = time.split(":").map(Number);
-            let period = hour >= 12 ? "مساءً" : "صباحًا";
-            hour = hour % 12 || 12;
-            return `${hour}:${minute} ${period}`;
-        }
-
-        function showReward() {
-            let rewards = [
-                "🎁 هنيئًا لك! 'اللهم اجعل لي من كل ضيق مخرجًا ومن كل هم فرجًا'",
-                "🎁 أحسنت! 'اللهم اجعلني من المقبولين يوم القيامة'",
-                "🎁 بارك الله فيك! 'اللهم اجعل صلاتي سببًا في دخول الفردوس الأعلى'"
-            ];
-            let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
-            document.getElementById("reward").innerText = randomReward;
-            document.getElementById("reward").style.display = "block";
-        }
-
-        function showReason() {
-            document.getElementById("reasonForm").style.display = "block";
-        }
-
-        function showAdvice() {
-            let reason = document.getElementById("reason").value;
-            let messages = {
-                "sick": "🤲 نسأل الله لك الشفاء والعافية.",
-                "lazy": "📢 تذكر أن الصلاة هي نور قلبك.",
-                "busy": "⏳ تنظيم الوقت مهم للصلاة.",
-                "forgot": "🔔 ضع منبهًا يذكرك بالصلاة."
-            };
-            document.getElementById("advice").innerText = messages[reason];
-            document.getElementById("advice").style.display = "block";
-        }
     </script>
-<video id="background-audio" autoplay style="display: none;">
-    <source src="https://github.com/mohhm23/Prayer-reminder-/raw/refs/heads/main/-%D9%82%D8%B1%D8%A7%D9%86-%D9%83%D8%B1%D9%8A%D9%85-%D8%B1%D8%A7%D8%AD%D9%87-%D9%86%D9%81%D8%B3%D9%8A%D9%87-%D9%84%D8%A7%D9%8A%D9%83%D9%84%D9%81-%D8%A7%D9%84%D9%84%D9%87-%D9%86%D9%81%D8%B3%D8%A2-%D8%A7%D9%84%D8%A7-%D9%88%D8%B3%D8%B9%D9%87%D8%A7-HD%20(1).mp4" type="video/mp4">
-    متصفحك لا يدعم تشغيل الفيديو.
-</video>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let video = document.getElementById("background-audio");
-
-        // ✅ تشغيل الصوت فقط مرة واحدة بدون تكرار
-        video.volume = 1.0;  // ضبط مستوى الصوت
-        video.play();
-
-        // ✅ عند انتهاء الفيديو، لا يتم تكراره
-        video.onended = function() {
-            video.pause();
-        };
-    });
-</script>
-
-</body>
 </body>
 </html>
