@@ -134,6 +134,7 @@
   </style>
 </head>
 <body>
+  <audio id="azanAudio" src="https://cdn.islamic.network/audio/adhan/azan-makkah.mp3" preload="auto"></audio>
   <div class="loader" id="loader">
     <div class="spinner"></div>
   </div>  <div class="container" id="mainContent" style="display:none;">
@@ -169,12 +170,21 @@
 </div>
 
   </div>  <script>
+    const azanAudio = document.getElementById("azanAudio");
+
+    function requestNotificationPermission() {
+      if ("Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+    }
+
     window.addEventListener("load", function () {
       const loader = document.getElementById("loader");
       const mainContent = document.getElementById("mainContent");
       setTimeout(() => {
         loader.style.display = "none";
         mainContent.style.display = "block";
+        requestNotificationPermission();
       }, 1200);
     });
 
@@ -220,6 +230,37 @@
       return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${suffix}`;
     }
 
+    function scheduleAzanNotifications(timings) {
+      const now = new Date();
+      const prayerNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+      const prayerLabels = {
+        Fajr: "صلاة الفجر",
+        Dhuhr: "صلاة الظهر",
+        Asr: "صلاة العصر",
+        Maghrib: "صلاة المغرب",
+        Isha: "صلاة العشاء"
+      };
+
+      prayerNames.forEach(name => {
+        const [h, m] = timings[name].split(":").map(Number);
+        const prayerTime = new Date();
+        prayerTime.setHours(h, m, 0, 0);
+
+        if (prayerTime > now) {
+          const delay = prayerTime.getTime() - now.getTime();
+          setTimeout(() => {
+            azanAudio.play();
+            if (Notification.permission === "granted") {
+              new Notification(`🕌 ${prayerLabels[name]}`, {
+                body: "حان الآن وقت الصلاة",
+                icon: "https://cdn-icons-png.flaticon.com/512/2936/2936952.png"
+              });
+            }
+          }, delay);
+        }
+      });
+    }
+
     async function updatePrayerTimes() {
       const city = document.getElementById("cityInput").value.trim();
       if (!city) return alert("يرجى إدخال اسم المدينة");
@@ -243,6 +284,7 @@
             </tr>
           </table>
         `;
+        scheduleAzanNotifications(t);
       } catch (err) {
         alert("حدث خطأ أثناء جلب البيانات. تأكد من كتابة اسم المدينة بشكل صحيح.");
       }
