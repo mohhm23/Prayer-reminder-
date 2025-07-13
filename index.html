@@ -76,11 +76,24 @@
       width: 100%;
       max-width: 300px;
     }
+    .prayer-section {
+      background: #f1f8e9;
+      padding: 20px;
+      margin-top: 25px;
+      border-radius: 15px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .prayer-section h3 {
+      margin-bottom: 15px;
+      color: #1b5e20;
+      font-size: 22px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
       font-size: 16px;
+      border-radius: 12px;
+      overflow: hidden;
     }
     th, td {
       padding: 12px;
@@ -127,7 +140,7 @@
   <h2>أدخل مدينتك لعرض مواقيت الصلاة</h2>
   <input type="text" id="cityInput" placeholder="مثال: جدة">
   <button class="btn" onclick="updatePrayerTimes()">عرض الأوقات</button>
-  <div id="prayerTimes"></div>
+  <div id="prayerTimes" class="prayer-section hidden"></div>
 </div>
 
 <div class="card">
@@ -213,7 +226,10 @@
         const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=SA&method=4`);
         const data = await response.json();
         const t = data.data.timings;
-        const tableHTML = `
+        const section = document.getElementById("prayerTimes");
+        section.classList.remove("hidden");
+        section.innerHTML = `
+          <h3>🕰️ مواقيت الصلاة لمدينة ${city}</h3>
           <table>
             <tr><th>الفجر</th><th>الشروق</th><th>الظهر</th><th>العصر</th><th>المغرب</th><th>العشاء</th></tr>
             <tr>
@@ -226,7 +242,6 @@
             </tr>
           </table>
         `;
-        document.getElementById("prayerTimes").innerHTML = tableHTML;
       } catch (err) {
         alert("حدث خطأ أثناء جلب البيانات. تأكد من كتابة اسم المدينة بشكل صحيح.");
       }
