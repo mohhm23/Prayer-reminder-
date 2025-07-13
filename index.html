@@ -86,7 +86,8 @@
       background: #f9fbe7;
       padding: 20px;
       border-radius: 15px;
-      margin: 30px 0;
+      margin: 30px auto;
+      max-width: 800px;
     }
     .testimonial {
       background: #ffffff;
@@ -104,7 +105,9 @@
   </style>
 </head>
 <body>
-  <div class="intro-popup" id="introPopup">
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+  </div>  <div class="intro-popup" id="introPopup">
     <div class="intro-box">
       <h2>✨ أهم الميزات الجديدة</h2>
       <ul>
@@ -116,7 +119,7 @@
       </ul>
       <button onclick="closeIntro()">إغلاق</button>
     </div>
-  </div>  <div class="container" id="mainContent" style="display:none;">
+  </div>  <div id="mainContent" style="display:none;">
     <h1>مرحبًا بك، <span id="username">ضيف</span>!</h1><div class="testimonials">
   <h2>📢 أهم الأشخاص الذين جرّبوا الموقع</h2>
   <div class="testimonial">
@@ -133,7 +136,18 @@
   </div>
 </div>
 
+<!-- باقي مكونات الموقع هنا يتم إرجاعها حسب النسخة السابقة -->
+<!-- مثل جدول الصلوات، الأسئلة، الأذان، التطبيق، الفوتر إلخ -->
+
   </div>  <script>
+    window.addEventListener("load", function () {
+      const loader = document.getElementById("loader");
+      setTimeout(() => {
+        loader.style.display = "none";
+        document.getElementById("introPopup").style.display = "flex";
+      }, 1000);
+    });
+
     function closeIntro() {
       document.getElementById('introPopup').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
